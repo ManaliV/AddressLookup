@@ -24,12 +24,6 @@ namespace AddressLookup.Repository
         {
 
             connection();
-            //SqlCommand com = new SqlCommand("AddAddress", con);
-            //com.CommandType = CommandType.StoredProcedure;
-            //com.Parameters.AddWithValue("@", obj.Name);
-            //com.Parameters.AddWithValue("@", obj.City);
-            //com.Parameters.AddWithValue("@Address", obj.Address);
-            
             con.Open();
             foreach (var addressModel in addressModels)
             {
@@ -49,7 +43,7 @@ namespace AddressLookup.Repository
                         return false;
                     }
                 }
-                catch(Exception e)
+                catch
                 {
                     con.Close();
                     return false;
@@ -63,8 +57,6 @@ namespace AddressLookup.Repository
         private List<AddressModel> GetMatchingAddressHelper(string address, string zipCode, string tableName)
         {
             connection();
-
-            //string tableName = "tbl_all_address";
             List<AddressModel> addressList = new List<AddressModel>();
             string code= Utility.GetCodeFromCurrentAddress(address, zipCode);
 
@@ -107,37 +99,8 @@ namespace AddressLookup.Repository
 
             return allAddressMatchingModels;
 
-            //Using Procedure
-            //SqlCommand com = new SqlCommand("GetAddress", con);
-            //com.CommandType = CommandType.StoredProcedure;
-            //SqlDataAdapter da = new SqlDataAdapter(com);
-            //DataTable dt = new DataTable();
-
-            //con.Open();
-            //da.Fill(dt);
-            //con.Close();
-            ////Bind EmpModel generic list using dataRow     
-            //foreach (DataRow dr in dt.Rows)
-            //{
-
-            //    addressList.Add(
-
-            //        new AddressModel
-            //        {
-
-            //            Address = Convert.ToString(dr["Address"]),
-            //            ZipCode = Convert.ToString(dr["ZipCode"]),
-            //            Status = Convert.ToString(dr["STatus"]),
-            //            AddressID = Convert.ToInt32(dr["AddressID"])
-
-            //        }
-            //        );
-            //}
-
-
-            //return addressList;
         }
-        //To Update Employee details    
+
         public bool UpdateAddress()
         {
 
